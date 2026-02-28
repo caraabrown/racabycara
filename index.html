@@ -22,6 +22,8 @@
       --mid-grey: #888480;
       --border-light: rgba(184,154,106,0.25);
       --border-dark: rgba(184,154,106,0.15);
+      --nav-h: 70px;
+      --bar-h: 52px;
     }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
@@ -157,6 +159,7 @@
     #main-site {
       opacity: 0;
       transition: opacity 1s ease 0.3s;
+      padding-top: var(--nav-h);   /* push content below fixed nav */
     }
     #main-site.visible { opacity: 1; }
 
@@ -167,16 +170,14 @@
       left: 0;
       right: 0;
       z-index: 500;
-      padding: 1.5rem 3rem;
+      height: var(--nav-h);
+      padding: 0 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s, padding 0.4s;
-    }
-    nav.scrolled {
-      background: rgba(14,13,11,0.95);
-      backdrop-filter: blur(12px);
-      padding: 1rem 3rem;
+      background: rgba(14,13,11,0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border-dark);
     }
     .nav-brand {
@@ -186,35 +187,40 @@
       letter-spacing: 0.45em;
       text-transform: uppercase;
       color: var(--gold);
+      white-space: nowrap;
     }
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       align-items: center;
       list-style: none;
+      flex-wrap: nowrap;
     }
     .nav-links a {
       font-family: 'Josefin Sans', sans-serif;
       font-weight: 200;
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      opacity: 0.7;
+      opacity: 0.75;
+      white-space: nowrap;
       transition: opacity 0.3s, color 0.3s;
     }
     .nav-links a:hover { opacity: 1; color: var(--gold-light); }
     .nav-shop-btn {
       font-family: 'Josefin Sans', sans-serif;
       font-weight: 200;
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      padding: 0.6rem 1.5rem;
+      padding: 0.55rem 1.3rem;
       border: 1px solid var(--gold);
-      color: var(--gold);
+      color: var(--gold) !important;
+      opacity: 1 !important;
+      white-space: nowrap;
       transition: background 0.3s, color 0.3s;
     }
-    .nav-shop-btn:hover { background: var(--gold); color: var(--almost-black); }
+    .nav-shop-btn:hover { background: var(--gold); color: var(--almost-black) !important; }
 
     /* ─── WORLD TOGGLE BAR ─── */
     .world-bar {
@@ -223,18 +229,20 @@
       background: var(--almost-black);
       border-bottom: 1px solid var(--border-dark);
       position: sticky;
-      top: 0;
-      z-index: 100;
-      margin-top: 0;
+      top: var(--nav-h);
+      z-index: 400;
     }
     .world-tab {
       flex: 1;
-      padding: 1rem 2rem;
-      text-align: center;
+      height: var(--bar-h);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Josefin Sans', sans-serif;
       font-weight: 200;
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
+      font-size: 0.58rem;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       cursor: pointer;
       transition: background 0.3s, color 0.3s;
@@ -242,6 +250,7 @@
       background: transparent;
       color: var(--mid-grey);
       position: relative;
+      white-space: nowrap;
     }
     .world-tab::after {
       content: '';
@@ -249,14 +258,14 @@
       bottom: 0;
       left: 10%;
       right: 10%;
-      height: 1px;
+      height: 2px;
       background: var(--gold);
       transform: scaleX(0);
-      transition: transform 0.3s;
+      transition: transform 0.35s;
     }
     .world-tab.active { color: var(--gold-light); }
     .world-tab.active::after { transform: scaleX(1); }
-    .world-divider { width: 1px; background: var(--border-dark); }
+    .world-divider { width: 1px; background: var(--border-dark); flex-shrink: 0; }
 
     /* ─── COLLECTION WORLDS ─── */
     .world { display: none; }
@@ -1491,8 +1500,7 @@
     /* ─── MOBILE RESPONSIVE ─── */
     @media (max-width: 768px) {
       section { padding: 4rem 1.5rem; }
-      nav { padding: 1.2rem 1.5rem; }
-      nav.scrolled { padding: 0.8rem 1.5rem; }
+      nav { padding: 0 1.5rem; } /* height stays var(--nav-h) via fixed height */
       .nav-links { display: none; }
       .hero-inner {
         grid-template-columns: 1fr;
