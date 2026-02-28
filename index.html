@@ -1,0 +1,2540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RACA — Handcrafted Jewelry by Cara</title>
+  <meta name="description" content="RACA is a California-based handcrafted jewelry brand by Cara. Two worlds: simple, understated essentials and bold, sculptural statement pieces. As seen in French Vogue.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cream: #f5f0e8;
+      --warm-white: #faf8f5;
+      --gold: #b89a6a;
+      --gold-light: #d4b88a;
+      --charcoal: #1a1814;
+      --almost-black: #0e0d0b;
+      --mid-grey: #888480;
+      --border-light: rgba(184,154,106,0.25);
+      --border-dark: rgba(184,154,106,0.15);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── SPLIT LANDING ─── */
+    #landing {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #landing.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .split {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: flex 0.9s cubic-bezier(0.77,0,0.18,1);
+    }
+    .split:hover { flex: 1.4; }
+
+    .split-essentials {
+      background: var(--warm-white);
+      color: var(--charcoal);
+    }
+    .split-bold {
+      background: var(--almost-black);
+      color: var(--cream);
+    }
+
+    .split-divider {
+      width: 1px;
+      height: 100%;
+      background: var(--gold);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .split-content {
+      text-align: center;
+      padding: 2rem;
+      pointer-events: none;
+      position: relative;
+      z-index: 2;
+    }
+    .split-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: clamp(0.6rem, 1vw, 0.75rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0.6;
+    }
+    .split-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .split-essentials .split-name { color: var(--charcoal); }
+    .split-bold .split-name {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .split-tagline {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: clamp(0.55rem, 0.9vw, 0.7rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 2.5rem;
+    }
+    .split-cta {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.75rem 2rem;
+      border: 1px solid currentColor;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .split:hover .split-cta { opacity: 1; }
+
+    /* Brand name at center top */
+    .landing-brand {
+      position: absolute;
+      top: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* Decorative lines */
+    .split-line {
+      position: absolute;
+      background: currentColor;
+      opacity: 0.08;
+    }
+
+    /* ─── MAIN SITE ─── */
+    #main-site {
+      opacity: 0;
+      transition: opacity 1s ease 0.3s;
+    }
+    #main-site.visible { opacity: 1; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(14,13,11,0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 3rem;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+    .nav-shop-btn {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-shop-btn:hover { background: var(--gold); color: var(--almost-black); }
+
+    /* ─── WORLD TOGGLE BAR ─── */
+    .world-bar {
+      display: flex;
+      align-items: stretch;
+      background: var(--almost-black);
+      border-bottom: 1px solid var(--border-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin-top: 0;
+    }
+    .world-tab {
+      flex: 1;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      border: none;
+      background: transparent;
+      color: var(--mid-grey);
+      position: relative;
+    }
+    .world-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .world-tab.active { color: var(--gold-light); }
+    .world-tab.active::after { transform: scaleX(1); }
+    .world-divider { width: 1px; background: var(--border-dark); }
+
+    /* ─── COLLECTION WORLDS ─── */
+    .world { display: none; }
+    .world.active { display: block; }
+
+    /* ─── HERO SECTIONS ─── */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ESSENTIALS HERO */
+    .hero-essentials {
+      background: var(--warm-white);
+      color: var(--charcoal);
+    }
+    .hero-essentials-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(184,154,106,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(184,154,106,0.05) 0%, transparent 50%);
+    }
+    .hero-essentials-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(180,170,150,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180,170,150,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* BOLD HERO */
+    .hero-bold {
+      background: var(--almost-black);
+      color: var(--cream);
+    }
+    .hero-bold-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(184,154,106,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(184,154,106,0.06) 0%, transparent 40%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 4rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text-group {}
+    .hero-pre {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .hero-essentials .hero-title { color: var(--charcoal); }
+    .hero-bold .hero-title {
+      font-style: italic;
+      color: var(--cream);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-desc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.8rem;
+      line-height: 2;
+      letter-spacing: 0.05em;
+      opacity: 0.65;
+      max-width: 380px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-img-frame {
+      position: relative;
+    }
+    .hero-img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: rgba(184,154,106,0.08);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-essentials .hero-img-placeholder { background: rgba(184,154,106,0.05); }
+    .hero-bold .hero-img-placeholder { background: rgba(184,154,106,0.06); }
+
+    .placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      opacity: 0.3;
+      text-align: center;
+      padding: 1rem;
+    }
+    .img-note {
+      position: absolute;
+      bottom: -1.5rem;
+      right: 0;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      opacity: 0.4;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      background: var(--gold);
+      color: var(--almost-black);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline-dark {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      transition: background 0.3s, color 0.3s;
+      margin-left: 1rem;
+    }
+    .btn-outline-dark:hover { background: var(--charcoal); color: var(--cream); }
+
+    .btn-outline-light {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border: 1px solid rgba(245,240,232,0.4);
+      color: var(--cream);
+      transition: border-color 0.3s, background 0.3s;
+      margin-left: 1rem;
+    }
+    .btn-outline-light:hover { border-color: var(--gold); background: rgba(184,154,106,0.1); }
+
+    /* ─── SECTION COMMONS ─── */
+    section {
+      padding: 6rem 4rem;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 0.58rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      opacity: 0.55;
+      margin-bottom: 3.5rem;
+      max-width: 500px;
+    }
+
+    /* ─── ESSENTIALS SECTION COLORS ─── */
+    .bg-warm { background: var(--warm-white); color: var(--charcoal); }
+    .bg-warm .section-title { color: var(--charcoal); }
+    .bg-warm-alt { background: #eee9de; color: var(--charcoal); }
+    .bg-dark { background: var(--almost-black); color: var(--cream); }
+    .bg-dark-alt { background: var(--charcoal); color: var(--cream); }
+
+    /* ─── PRODUCT GRIDS ─── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      group: true;
+    }
+    .product-img {
+      aspect-ratio: 3/4;
+      background: rgba(184,154,106,0.07);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:hover .product-img { transform: scale(1.03); }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .product-card:hover .product-img img { transform: scale(1.05); }
+
+    .product-img-placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.75rem;
+      opacity: 0.25;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .product-info {
+      padding: 1.2rem 0.5rem 0.5rem;
+    }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+    .product-material {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 0.6rem;
+    }
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .product-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(transparent, rgba(14,13,11,0.85));
+      transform: translateY(100%);
+      transition: transform 0.4s;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .product-card:hover .product-overlay { transform: translateY(0); }
+
+    .overlay-btn {
+      flex: 1;
+      text-align: center;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.7rem 0.5rem;
+      background: var(--gold);
+      color: var(--almost-black);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .overlay-btn:hover { background: var(--gold-light); }
+
+    /* Essentials product grid has warm bg */
+    .essentials-product-section { background: var(--warm-white); color: var(--charcoal); }
+    .essentials-product-section .product-img { background: rgba(180,160,120,0.06); border-color: rgba(150,130,100,0.15); }
+
+    /* Bold product grid has dark bg */
+    .bold-product-section { background: var(--almost-black); color: var(--cream); }
+    .bold-product-section .product-img { background: rgba(184,154,106,0.05); }
+
+    /* ─── CATEGORIES (ESSENTIALS) ─── */
+    .category-nav {
+      display: flex;
+      gap: 0;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .cat-btn {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.3s, color 0.3s;
+      color: inherit;
+      position: relative;
+    }
+    .cat-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .cat-btn:hover, .cat-btn.active { opacity: 1; }
+    .cat-btn.active::after { transform: scaleX(1); }
+
+    /* ─── PRESS SECTION ─── */
+    .press-section {
+      background: #0b0a09;
+      padding: 6rem 4rem;
+    }
+    .press-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .press-card {
+      border: 1px solid var(--border-dark);
+      padding: 2.5rem;
+      position: relative;
+      transition: border-color 0.4s;
+    }
+    .press-card:hover { border-color: var(--gold); }
+    .press-outlet {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .press-event {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1.5rem;
+    }
+    .press-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.75;
+    }
+    .press-accent {
+      position: absolute;
+      top: -1px;
+      left: 2rem;
+      width: 3rem;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    /* Award/show badges */
+    .show-badges {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border-dark);
+      flex-wrap: wrap;
+    }
+    .show-badge {
+      text-align: center;
+    }
+    .badge-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+    .badge-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    /* ─── INSTAGRAM STRIP ─── */
+    .insta-section {
+      background: var(--charcoal);
+      padding: 5rem 4rem;
+      text-align: center;
+    }
+    .insta-inner { max-width: 1200px; margin: 0 auto; }
+    .insta-handle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .insta-desc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      opacity: 0.4;
+      margin-bottom: 2.5rem;
+    }
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+    }
+    .insta-thumb {
+      aspect-ratio: 1;
+      background: rgba(184,154,106,0.06);
+      border: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      overflow: hidden;
+    }
+    .insta-thumb:hover { border-color: var(--gold); }
+    .insta-thumb span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      opacity: 0.2;
+    }
+
+    /* ─── ABOUT SECTION ─── */
+    .about-section {
+      background: var(--warm-white);
+      color: var(--charcoal);
+      padding: 7rem 4rem;
+    }
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-img-frame {
+      aspect-ratio: 4/5;
+      background: rgba(184,154,106,0.06);
+      border: 1px solid rgba(150,130,100,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-text .section-label { margin-bottom: 0.75rem; }
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--charcoal);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    .about-body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.78rem;
+      line-height: 2.1;
+      letter-spacing: 0.03em;
+      opacity: 0.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── PAYMENT / SHOP MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(14,13,11,0.92);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s, visibility 0.4s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+
+    .modal {
+      background: var(--warm-white);
+      color: var(--charcoal);
+      max-width: 500px;
+      width: 90%;
+      padding: 3rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--charcoal);
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    .modal-close:hover { opacity: 1; }
+
+    .modal-product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+    }
+    .modal-product-material {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+    }
+    .modal-product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .modal-product-desc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.72rem;
+      line-height: 2;
+      opacity: 0.65;
+      margin-bottom: 2rem;
+    }
+    .modal-stripe-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem;
+      background: var(--almost-black);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 0.75rem;
+    }
+    .modal-stripe-btn:hover { background: var(--charcoal); }
+    .modal-stripe-note {
+      text-align: center;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      opacity: 0.4;
+    }
+    .modal-stripe-icons {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.75rem;
+      opacity: 0.4;
+    }
+    .stripe-icon {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      border: 1px solid currentColor;
+      padding: 0.2rem 0.4rem;
+    }
+
+    /* ─── CONTACT / FOOTER ─── */
+    footer {
+      background: var(--almost-black);
+      border-top: 1px solid var(--border-dark);
+      padding: 4rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer-desc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.68rem;
+      line-height: 2;
+      letter-spacing: 0.05em;
+      opacity: 0.45;
+      max-width: 280px;
+    }
+    .footer-col-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .footer-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      opacity: 0.45;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .footer-links a:hover { opacity: 1; color: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      opacity: 0.3;
+    }
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-social a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.35;
+      transition: opacity 0.3s;
+    }
+    .footer-social a:hover { opacity: 0.8; }
+
+    /* ─── REVEAL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── CONTACT SECTION ─── */
+    .contact-section {
+      background: var(--charcoal);
+      padding: 5rem 4rem;
+      text-align: center;
+    }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-email {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .contact-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      opacity: 0.4;
+    }
+
+    /* ─── JUZU SECTION ─── */
+    .juzu-section {
+      background: #080706;
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .juzu-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(184,154,106,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 20%, rgba(184,154,106,0.04) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .juzu-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .juzu-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+    .juzu-text {}
+    .juzu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .juzu-title span { color: var(--gold); font-style: normal; }
+    .juzu-body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.78rem;
+      line-height: 2.2;
+      opacity: 0.6;
+      margin-bottom: 2rem;
+    }
+    .juzu-meaning {
+      border-left: 1px solid var(--gold);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .juzu-meaning-word {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--gold-light);
+      font-style: italic;
+      margin-bottom: 0.25rem;
+    }
+    .juzu-meaning-def {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      opacity: 0.45;
+    }
+    .juzu-img-frame {
+      aspect-ratio: 1;
+      background: rgba(184,154,106,0.04);
+      border: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    /* Decorative bead motif on the image frame */
+    .juzu-img-frame::before {
+      content: '◦ ◦ ◦ ◦ ◦ ◦ ◦ ◦';
+      position: absolute;
+      bottom: -1.5rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      opacity: 0.4;
+    }
+    .juzu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .juzu-card {
+      border: 1px solid var(--border-dark);
+      padding: 0;
+      cursor: pointer;
+      transition: border-color 0.4s, transform 0.4s;
+      overflow: hidden;
+      position: relative;
+    }
+    .juzu-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .juzu-card-img {
+      aspect-ratio: 1;
+      background: rgba(184,154,106,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .juzu-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .juzu-card:hover .juzu-card-img img { transform: scale(1.05); }
+    .juzu-card-body {
+      padding: 1.5rem;
+    }
+    .juzu-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .juzu-card-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid-grey);
+      margin-bottom: 0.75rem;
+    }
+    .juzu-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+    .juzu-bead-count {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-dark);
+      padding: 0.25rem 0.6rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .juzu-cta-band {
+      margin-top: 3.5rem;
+      border: 1px solid var(--border-dark);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .juzu-cta-band::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+    .juzu-cta-text {}
+    .juzu-cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    .juzu-cta-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      opacity: 0.45;
+    }
+
+    /* ─── CUSTOM ORDERS — ESSENTIALS ─── */
+    .custom-essentials {
+      background: #ede8de;
+      color: var(--charcoal);
+      padding: 6rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .custom-essentials::after {
+      content: 'CUSTOM';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      font-weight: 300;
+      color: rgba(180,154,106,0.06);
+      letter-spacing: 0.3em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .custom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .custom-process {
+      list-style: none;
+      counter-reset: steps;
+      margin-bottom: 2.5rem;
+    }
+    .custom-step {
+      counter-increment: steps;
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+    }
+    .step-body {}
+    .step-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      color: var(--charcoal);
+    }
+    .step-desc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      line-height: 1.9;
+      opacity: 0.6;
+    }
+
+    /* ─── CUSTOM ORDERS — STUDIO (Bold) ─── */
+    .custom-studio {
+      background: #060504;
+      color: var(--cream);
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .custom-studio::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(184,154,106,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .custom-studio-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .custom-studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .custom-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .custom-option-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--border-dark);
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .custom-option-item:hover, .custom-option-item.selected {
+      border-color: var(--gold);
+      background: rgba(184,154,106,0.05);
+    }
+    .option-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .custom-option-item.selected .option-dot,
+    .custom-option-item:hover .option-dot { background: var(--gold); }
+    .option-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .option-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      margin-left: auto;
+    }
+    /* Inquiry form */
+    .inquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-field label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-dark);
+      border-radius: 0;
+      padding: 0.85rem 1rem;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.72rem;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { opacity: 0.35; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--gold); }
+    .form-field select option { background: var(--almost-black); color: var(--cream); }
+    .form-field textarea { resize: vertical; min-height: 100px; }
+    /* Light theme form (essentials) */
+    .form-light .form-field input,
+    .form-light .form-field select,
+    .form-light .form-field textarea {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(150,130,100,0.25);
+      color: var(--charcoal);
+    }
+    .form-light .form-field input::placeholder,
+    .form-light .form-field textarea::placeholder { color: var(--charcoal); opacity: 0.35; }
+    .form-light .form-field label { opacity: 0.6; color: var(--charcoal); }
+    .form-light .form-field select option { background: var(--warm-white); color: var(--charcoal); }
+    .form-submit-dark {
+      background: var(--gold);
+      color: var(--almost-black);
+      border: none;
+      padding: 1.1rem 2.5rem;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+    .form-submit-dark:hover { background: var(--gold-light); }
+    .form-submit-light {
+      background: var(--charcoal);
+      color: var(--cream);
+      border: none;
+      padding: 1.1rem 2.5rem;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+    .form-submit-light:hover { background: var(--almost-black); }
+    .form-note {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      opacity: 0.35;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    /* Custom highlight band at top of page sections */
+    .custom-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--gold);
+      color: var(--almost-black);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.5rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      margin-bottom: 2rem;
+      cursor: pointer;
+    }
+    .custom-flag-e {
+      background: var(--gold);
+      color: var(--almost-black);
+    }
+    .custom-flag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    /* Essentials custom highlight box */
+    .essentials-custom-highlight {
+      background: rgba(184,154,106,0.08);
+      border: 1px solid var(--border-light);
+      border-left: 3px solid var(--gold);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .ech-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+    }
+    .ech-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 200;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      opacity: 0.55;
+    }
+
+    /* ─── MOBILE RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 1.2rem 1.5rem; }
+      nav.scrolled { padding: 0.8rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 6rem 1.5rem 3rem;
+        gap: 2.5rem;
+      }
+      .hero-img-frame { order: -1; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .insta-grid { grid-template-columns: repeat(3, 1fr); }
+      .press-grid { grid-template-columns: 1fr; }
+      .split { min-height: 50vh; }
+      #landing { flex-direction: column; }
+      .split-divider { width: 100%; height: 1px; }
+    }
+
+    /* ─── GOLD ORNAMENT ─── */
+    .ornament {
+      display: block;
+      text-align: center;
+      color: var(--gold);
+      opacity: 0.4;
+      font-size: 0.8rem;
+      letter-spacing: 0.5em;
+      margin: 2rem 0;
+    }
+
+    /* Animated gold bar separator */
+    .gold-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0;
+    }
+
+    /* ─── CART BUBBLE ─── */
+    .cart-count {
+      display: none;
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--gold);
+      color: var(--almost-black);
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      font-size: 0.5rem;
+      line-height: 16px;
+      text-align: center;
+      font-weight: 400;
+    }
+    .cart-icon { position: relative; display: inline-block; }
+
+    /* Sticky CTA floating */
+    .floating-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 300;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .floating-cta.visible { opacity: 1; transform: translateY(0); }
+    .floating-cta a {
+      display: block;
+      background: var(--gold);
+      color: var(--almost-black);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.9rem 1.5rem;
+      transition: background 0.3s;
+    }
+    .floating-cta a:hover { background: var(--gold-light); }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     SPLIT LANDING SCREEN
+═══════════════════════════════════════════ -->
+<div id="landing">
+  <div class="landing-brand">RACA</div>
+
+  <!-- Essentials Side -->
+  <div class="split split-essentials" onclick="enterWorld('essentials')">
+    <div class="split-content">
+      <p class="split-label">Collection I</p>
+      <h2 class="split-name">Essentials</h2>
+      <p class="split-tagline">Simple · Understated · Timeless</p>
+      <span class="split-cta">Enter →</span>
+    </div>
+  </div>
+
+  <div class="split-divider"></div>
+
+  <!-- Bold Side -->
+  <div class="split split-bold" onclick="enterWorld('bold')">
+    <div class="split-content">
+      <p class="split-label">Collection II</p>
+      <h2 class="split-name">Studio</h2>
+      <p class="split-tagline">Bold · Sculptural · Singular</p>
+      <span class="split-cta">Enter →</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN SITE
+═══════════════════════════════════════════ -->
+<div id="main-site">
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="nav-brand" onclick="showLanding()">RACA</a>
+    <ul class="nav-links">
+      <li><a href="#shop" onclick="scrollToShop()">Shop</a></li>
+      <li><a href="#juzu" onclick="scrollToJuzu()">Juzu</a></li>
+      <li><a href="#custom-essentials" onclick="scrollToCustom()" style="color:var(--gold-light);">Custom ✦</a></li>
+      <li><a href="#press">Press</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://instagram.com/racabycara" target="_blank" rel="noopener">Instagram</a></li>
+      <li>
+        <a href="#shop" class="nav-shop-btn" onclick="scrollToShop()">Shop Now</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- WORLD TOGGLE BAR -->
+  <div class="world-bar" id="world-bar">
+    <button class="world-tab active" id="tab-essentials" onclick="switchWorld('essentials')">
+      Essentials — Simple &amp; Understated
+    </button>
+    <div class="world-divider"></div>
+    <button class="world-tab" id="tab-bold" onclick="switchWorld('bold')">
+      Studio — Bold, Unique &amp; Juzu
+    </button>
+  </div>
+
+  <!-- ─────────── ESSENTIALS WORLD ─────────── -->
+  <div class="world active" id="world-essentials">
+
+    <!-- Hero -->
+    <div class="hero hero-essentials">
+      <div class="hero-essentials-bg"></div>
+      <div class="hero-essentials-grid"></div>
+      <div class="hero-inner">
+        <div class="hero-text-group">
+          <p class="hero-pre">RACA Essentials</p>
+          <h1 class="hero-title">
+            The quiet<br>piece that<br><em>speaks volumes.</em>
+          </h1>
+          <p class="hero-desc">
+            Handcrafted in California. Each essential is designed to wear daily, to layer, to cherish. Gold-filled, sterling silver, and natural stones — refined to their essence.
+          </p>
+          <div>
+            <a href="#essentials-shop" class="btn-primary" onclick="document.getElementById('essentials-shop').scrollIntoView({behavior:'smooth'})">Shop Essentials</a>
+            <a href="#press" class="btn-outline-dark">As Seen In</a>
+          </div>
+        </div>
+        <div class="hero-img-frame">
+          <div class="hero-img-placeholder">
+            <!-- Replace src with your product photography -->
+            <p class="placeholder-text">Add hero image here<br><small style="font-size:0.65rem;opacity:0.5">Recommended: 600×800px</small></p>
+          </div>
+          <span class="img-note">add photo / hero image</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Essentials Shop -->
+    <section class="essentials-product-section" id="essentials-shop">
+      <div class="section-inner">
+        <span class="section-label">Shop Essentials</span>
+        <h2 class="section-title" style="color:var(--charcoal)">Handcrafted for everyday.</h2>
+        <p class="section-subtitle" style="color:var(--charcoal)">Each piece made by hand in California. Limited quantities.</p>
+
+        <!-- Category filter -->
+        <div class="category-nav">
+          <button class="cat-btn active" onclick="filterCat(this,'all')">All</button>
+          <button class="cat-btn" onclick="filterCat(this,'necklaces')">Necklaces</button>
+          <button class="cat-btn" onclick="filterCat(this,'bracelets')">Bracelets</button>
+          <button class="cat-btn" onclick="filterCat(this,'earrings')">Earrings</button>
+          <button class="cat-btn" onclick="filterCat(this,'anklets')">Anklets</button>
+          <button class="cat-btn" onclick="filterCat(this,'rings')">Rings</button>
+        </div>
+
+        <!-- Product Grid — Essentials -->
+        <div class="product-grid" id="essentials-grid">
+
+          <!-- Card 1 -->
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Delicate Layering Chain','14k Gold-filled · 16–18"','$68','A fine curb chain, designed to be worn alone or stacked. Adjustable with a lobster clasp.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <!-- <img src="images/essentials-chain.jpg" alt="Delicate Layering Chain"> -->
+              <p class="product-img-placeholder-text">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Quick Buy</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Delicate Layering Chain</p>
+              <p class="product-material">14k Gold-filled · 16–18"</p>
+              <p class="product-price">$68</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card" data-cat="bracelets" onclick="openModal('Thin Gold Cuff','14k Gold-filled · Adjustable','$75','A slim, hammered cuff that wraps the wrist. One size fits most.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Quick Buy</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Thin Gold Cuff</p>
+              <p class="product-material">14k Gold-filled · Adjustable</p>
+              <p class="product-price">$75</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card" data-cat="earrings" onclick="openModal('Small Hoop Set','Sterling Silver · 12mm','$55','Classic small hoops, sterling silver with a secure snap closure.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Quick Buy</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Small Hoop Set</p>
+              <p class="product-material">Sterling Silver · 12mm</p>
+              <p class="product-price">$55</p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Stone Drop Pendant','14k Gold-filled · Natural Stone','$95','A single faceted stone on a fine chain. Available in turquoise, labradorite, and rose quartz.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Quick Buy</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Stone Drop Pendant</p>
+              <p class="product-material">14k Gold-filled · Natural Stone</p>
+              <p class="product-price">$95</p>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card" data-cat="anklets" onclick="openModal('Dainty Anklet','14k Gold-filled · 9–10"','$58','A simple, adjustable anklet. Perfect for layering.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Quick Buy</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Dainty Anklet</p>
+              <p class="product-material">14k Gold-filled · 9–10"</p>
+              <p class="product-price">$58</p>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card" data-cat="rings" onclick="openModal('Stacking Band','Sterling Silver · Sizes 5–9','$48','A minimal band, perfect for stacking. Hammered texture, sterling silver.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Quick Buy</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Stacking Band</p>
+              <p class="product-material">Sterling Silver · Sizes 5–9</p>
+              <p class="product-price">$48</p>
+            </div>
+          </div>
+
+        </div>
+        <!-- Add more products by duplicating a product-card block above and updating:
+             onclick parameters: (name, material, price, description, stripe-link)
+             data-cat: necklaces / bracelets / earrings / anklets / rings -->
+
+        <div style="text-align:center;margin-top:3rem;">
+          <p style="font-family:'Josefin Sans';font-weight:200;font-size:0.6rem;letter-spacing:0.25em;opacity:0.4;margin-bottom:1rem;">HANDMADE IN LIMITED QUANTITIES · NEW PIECES ADDED SEASONALLY</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ESSENTIALS CUSTOM ORDERS ─── -->
+    <section class="custom-essentials" id="custom-essentials">
+      <div class="custom-inner">
+        <div class="reveal">
+          <span class="section-label">Custom Orders</span>
+          <h2 class="section-title" style="color:var(--charcoal);">Made exactly<br>for you.</h2>
+          <p class="section-subtitle" style="color:var(--charcoal)">Every essential piece can be made to your specifications — length, stone, metal, finish. Tell Cara what you're imagining.</p>
+
+          <div class="essentials-custom-highlight">
+            <p class="ech-title">Personalized Essentials</p>
+            <p class="ech-sub">Custom chain lengths · stone swaps · name or date engravings · layered sets built together</p>
+          </div>
+          <div class="essentials-custom-highlight">
+            <p class="ech-title">Gifting &amp; Sets</p>
+            <p class="ech-sub">Custom gift sets for weddings, milestones, and bridesmaids — priced by set size</p>
+          </div>
+          <div class="essentials-custom-highlight">
+            <p class="ech-title">Timeline</p>
+            <p class="ech-sub">2–4 weeks depending on complexity. Rush available — ask when inquiring.</p>
+          </div>
+
+          <ol class="custom-process" style="margin-top:2rem;">
+            <li class="custom-step">
+              <span class="step-num">1</span>
+              <div class="step-body">
+                <p class="step-title">Tell me what you're envisioning</p>
+                <p class="step-desc">Fill in the form. Share reference images, your preferred stone, metal, length, and any special meaning behind the piece.</p>
+              </div>
+            </li>
+            <li class="custom-step">
+              <span class="step-num">2</span>
+              <div class="step-body">
+                <p class="step-title">Cara responds within 48 hours</p>
+                <p class="step-desc">You'll receive a quote and timeline. A 50% deposit is required to begin.</p>
+              </div>
+            </li>
+            <li class="custom-step">
+              <span class="step-num">3</span>
+              <div class="step-body">
+                <p class="step-title">Your piece is made by hand</p>
+                <p class="step-desc">Progress photos sent along the way. Balance due before shipping.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Essentials Custom Inquiry Form -->
+        <div class="reveal">
+          <div class="custom-flag custom-flag-e" style="margin-bottom:2rem;">
+            <span class="custom-flag-dot"></span>
+            Now accepting custom orders
+          </div>
+
+          <form class="inquiry-form form-light" onsubmit="submitEssentialsCustom(event)">
+            <div class="form-field">
+              <label>Your Name</label>
+              <input type="text" placeholder="Full name" required>
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-field">
+              <label>Piece Type</label>
+              <select required>
+                <option value="">Select a piece...</option>
+                <option>Necklace</option>
+                <option>Bracelet</option>
+                <option>Earrings</option>
+                <option>Anklet</option>
+                <option>Ring</option>
+                <option>Gift Set</option>
+                <option>Other / Not Sure</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Preferred Metal</label>
+              <select>
+                <option value="">Select metal...</option>
+                <option>14k Gold-filled</option>
+                <option>Sterling Silver</option>
+                <option>Either / Open to suggestion</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Occasion or Meaning (optional)</label>
+              <input type="text" placeholder="e.g. Wedding anniversary, gift for a friend…">
+            </div>
+            <div class="form-field">
+              <label>Describe your vision</label>
+              <textarea placeholder="Stone preferences, length, style, reference images, or anything else on your mind…" required></textarea>
+            </div>
+            <div class="form-field">
+              <label>Budget Range</label>
+              <select>
+                <option value="">Select range...</option>
+                <option>Under $100</option>
+                <option>$100–$200</option>
+                <option>$200–$400</option>
+                <option>$400+</option>
+                <option>Flexible / Unsure</option>
+              </select>
+            </div>
+            <button type="submit" class="form-submit-light">Send Custom Inquiry →</button>
+            <p class="form-note" style="color:var(--charcoal)">Cara responds within 48 hours. No commitment required to inquire.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /essentials world -->
+
+
+  <!-- ─────────── BOLD / STUDIO WORLD ─────────── -->
+  <div class="world" id="world-bold">
+
+    <!-- Hero -->
+    <div class="hero hero-bold">
+      <div class="hero-bold-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-text-group">
+          <p class="hero-pre" style="color:var(--gold)">RACA Studio</p>
+          <h1 class="hero-title">
+            Jewelry as<br><em>sculpture.</em><br>Worn once<br>& remembered.
+          </h1>
+          <p class="hero-desc">
+            Bold, one-of-a-kind statement pieces. Shown at the American Craft Council. Featured in French Vogue during Paris Fashion Week. Each piece is singular — when it's gone, it's gone.
+          </p>
+          <div>
+            <a href="#bold-shop" class="btn-primary" onclick="document.getElementById('bold-shop').scrollIntoView({behavior:'smooth'})">Shop Studio</a>
+            <a href="https://instagram.com/racabycara" target="_blank" rel="noopener" class="btn-outline-light">View on Instagram</a>
+          </div>
+        </div>
+        <div class="hero-img-frame">
+          <div class="hero-img-placeholder" style="background:rgba(184,154,106,0.04);">
+            <p class="placeholder-text" style="color:var(--cream)">Add hero image here<br><small style="font-size:0.65rem;opacity:0.5">Recommended: 600×800px</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Studio / Bold Shop -->
+    <section class="bold-product-section" id="bold-shop">
+      <div class="section-inner">
+        <span class="section-label">Studio Collection</span>
+        <h2 class="section-title">One-of-a-kind pieces.</h2>
+        <p class="section-subtitle">Bold, sculptural jewelry. Each piece is unique — sold and gone. As seen in French Vogue.</p>
+
+        <div class="product-grid">
+
+          <!-- Studio Card 1 -->
+          <div class="product-card" onclick="openModal('Sculptural Collar','Mixed Metals · One of One','$485','A bold statement collar, hand-formed in mixed oxidized metals. As seen on Instagram @racabycara. One of a kind.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text" style="color:var(--cream)">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Buy — One of One</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name">Sculptural Collar</p>
+              <p class="product-material" style="color:var(--mid-grey)">Mixed Metals · One of One</p>
+              <p class="product-price">$485</p>
+            </div>
+          </div>
+
+          <!-- Studio Card 2 -->
+          <div class="product-card" onclick="openModal('Brutalist Cuff','Oxidized Brass · Unique','$320','A heavy, hand-beaten cuff. Irregular form, intentional weight. One of one.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text" style="color:var(--cream)">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Buy — One of One</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name">Brutalist Cuff</p>
+              <p class="product-material" style="color:var(--mid-grey)">Oxidized Brass · Unique</p>
+              <p class="product-price">$320</p>
+            </div>
+          </div>
+
+          <!-- Studio Card 3 -->
+          <div class="product-card" onclick="openModal('Raw Crystal Pendant','Raw Crystal + 14k Gold Wrap · Unique','$395','A raw uncut crystal hand-wrapped in 14k gold wire. Each one entirely different. One of one.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text" style="color:var(--cream)">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Buy — One of One</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name">Raw Crystal Pendant</p>
+              <p class="product-material" style="color:var(--mid-grey)">Raw Crystal + 14k Gold Wrap</p>
+              <p class="product-price">$395</p>
+            </div>
+          </div>
+
+          <!-- Studio Card 4 -->
+          <div class="product-card" onclick="openModal('Architectural Earrings','Sterling Silver · One of One Pair','$265','Geometric drop earrings forged from sterling sheet. No two pairs alike. Featured @racabycara.','#your-stripe-payment-link-here')">
+            <div class="product-img">
+              <p class="product-img-placeholder-text" style="color:var(--cream)">Product photo</p>
+              <div class="product-overlay">
+                <span class="overlay-btn">Buy — One of One</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <p class="product-name">Architectural Earrings</p>
+              <p class="product-material" style="color:var(--mid-grey)">Sterling Silver · One of One Pair</p>
+              <p class="product-price">$265</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align:center;margin-top:3rem;">
+          <p style="font-family:'Josefin Sans';font-weight:200;font-size:0.6rem;letter-spacing:0.25em;opacity:0.35;margin-bottom:1.5rem;">ALL STUDIO PIECES ARE ONE OF ONE — ONCE SOLD, RETIRED FOREVER</p>
+          <a href="https://instagram.com/racabycara" target="_blank" rel="noopener" style="font-family:'Josefin Sans';font-weight:200;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:2px;">See New Work on Instagram @racabycara</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── STUDIO CUSTOM ORDERS ─── -->
+    <section class="custom-studio" id="custom-studio">
+      <div class="custom-studio-inner">
+        <div class="custom-flag" style="margin-bottom:3rem;">
+          <span class="custom-flag-dot"></span>
+          Now accepting commissions — Studio &amp; Juzu
+        </div>
+        <div class="custom-studio-grid">
+          <div class="reveal">
+            <span class="section-label">Commission a Piece</span>
+            <h2 class="section-title">Something made<br>only for you.</h2>
+            <p class="section-subtitle">Bold, sculptural, and singular. Commission a statement piece or a custom juzu — both begin with a conversation about who you are and what you want to carry.</p>
+
+            <div class="custom-options">
+              <div class="custom-option-item selected" onclick="selectOption(this,'studio-piece')">
+                <span class="option-dot"></span>
+                <span class="option-label">Studio Piece</span>
+                <span class="option-sub">Collar · Cuff · Earrings · Necklace</span>
+              </div>
+              <div class="custom-option-item" onclick="selectOption(this,'juzu')">
+                <span class="option-dot"></span>
+                <span class="option-label">Custom Juzu 数珠</span>
+                <span class="option-sub">108 beads · your stone · your intention</span>
+              </div>
+              <div class="custom-option-item" onclick="selectOption(this,'both')">
+                <span class="option-dot"></span>
+                <span class="option-label">Juzu + Studio Set</span>
+                <span class="option-sub">Curated pair — worn together</span>
+              </div>
+            </div>
+
+            <div style="border:1px solid var(--border-dark);padding:2rem;margin-bottom:2rem;">
+              <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--gold-light);margin-bottom:1rem;">The process</p>
+              <ol class="custom-process" style="margin:0;">
+                <li class="custom-step" style="margin-bottom:1.5rem;">
+                  <span class="step-num" style="color:var(--gold);">1</span>
+                  <div class="step-body">
+                    <p class="step-title" style="color:var(--cream);">You share your vision</p>
+                    <p class="step-desc">What stone speaks to you? What is the piece for? What do you want to feel when you wear it?</p>
+                  </div>
+                </li>
+                <li class="custom-step" style="margin-bottom:1.5rem;">
+                  <span class="step-num" style="color:var(--gold);">2</span>
+                  <div class="step-body">
+                    <p class="step-title" style="color:var(--cream);">Cara responds within 48 hours</p>
+                    <p class="step-desc">A proposal, timeline, and price. 50% deposit begins the work.</p>
+                  </div>
+                </li>
+                <li class="custom-step">
+                  <span class="step-num" style="color:var(--gold);">3</span>
+                  <div class="step-body">
+                    <p class="step-title" style="color:var(--cream);">Handmade. Photographed. Shipped.</p>
+                    <p class="step-desc">You'll see it before it ships. Studio pieces: 3–6 weeks. Juzu: 2–4 weeks.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Studio Custom Inquiry Form -->
+          <div class="reveal">
+            <form class="inquiry-form" onsubmit="submitStudioCustom(event)">
+              <div class="form-field">
+                <label>Your Name</label>
+                <input type="text" placeholder="Full name" required>
+              </div>
+              <div class="form-field">
+                <label>Email</label>
+                <input type="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-field">
+                <label>What are you commissioning?</label>
+                <select required id="studio-commission-type">
+                  <option value="">Select...</option>
+                  <option>Studio Piece — Bold / Sculptural</option>
+                  <option>Custom Juzu 数珠 — 108 Beads</option>
+                  <option>Juzu + Studio Set</option>
+                  <option>Not sure — let's talk</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>Stone or Material (if you have a preference)</label>
+                <input type="text" placeholder="e.g. Labradorite, obsidian, raw quartz, mixed metals…">
+              </div>
+              <div class="form-field">
+                <label>For a juzu: What is your intention?</label>
+                <input type="text" placeholder="e.g. Clarity, protection, gratitude, love…">
+              </div>
+              <div class="form-field">
+                <label>Tell me about this piece</label>
+                <textarea placeholder="Share inspiration, references, meaning, how you plan to wear it, or anything else that feels relevant. The more you share, the better."></textarea>
+              </div>
+              <div class="form-field">
+                <label>Budget</label>
+                <select>
+                  <option value="">Select range...</option>
+                  <option>$200–$400</option>
+                  <option>$400–$600</option>
+                  <option>$600–$1,000</option>
+                  <option>$1,000+</option>
+                  <option>Flexible — let's talk</option>
+                </select>
+              </div>
+              <button type="submit" class="form-submit-dark">Begin the Commission →</button>
+              <p class="form-note">No commitment required. Cara responds within 48 hours.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /bold world -->
+
+  <!-- ═══════════════════════════════════════════
+       JUZU — STUDIO WORLD (Standalone, always visible after bold world)
+  ═══════════════════════════════════════════ -->
+  <section class="juzu-section" id="juzu">
+    <div class="juzu-inner">
+      <div class="juzu-intro">
+        <div class="juzu-text reveal">
+          <span class="section-label">RACA Studio · Juzu</span>
+          <h2 class="juzu-title">
+            <span>数珠</span><br>
+            The sacred<br>bead of<br><em>108 intentions.</em>
+          </h2>
+          <div class="juzu-meaning">
+            <p class="juzu-meaning-word">Juzu / 数珠</p>
+            <p class="juzu-meaning-def">Japanese Buddhist prayer beads · 108 beads · one for every human desire</p>
+          </div>
+          <p class="juzu-body">
+            A juzu is not simply jewelry — it is a meditation object, a talisman, a daily practice worn on the wrist or carried in the hand. RACA's juzu are handmade, each strand singular in its bead selection, stone, and intention. They are the most personal thing Cara makes.
+          </p>
+          <p class="juzu-body">
+            Stones are chosen for their energy and beauty: labradorite for transformation, tiger's eye for clarity, malachite for protection, obsidian for grounding. Each juzu is unique — the stones, the tassel, the knot, the intention behind it — and every commission begins with a conversation.
+          </p>
+          <a href="#juzu-custom" class="btn-primary" onclick="document.getElementById('juzu-custom').scrollIntoView({behavior:'smooth'})">Commission a Juzu →</a>
+        </div>
+        <div class="juzu-img-frame reveal">
+          <!-- <img src="images/juzu-hero.jpg" alt="RACA Custom Juzu"> -->
+          <p class="placeholder-text" style="color:var(--cream);">Juzu hero photo<br><small style="opacity:0.4;font-size:0.65rem;">Recommended: 800×800px</small></p>
+        </div>
+      </div>
+
+      <!-- Juzu Product Cards -->
+      <div class="juzu-grid" id="juzu-grid">
+
+        <!-- Juzu 1 -->
+        <div class="juzu-card reveal" onclick="openModal('Labradorite Juzu','Labradorite · 108 Beads · Silk Tassel · One of One','$385','Full 108-bead juzu strung on silk thread with a hand-tied tassel. Labradorite stones chosen for transformation and intuition. One of one.','#your-stripe-link')">
+          <div class="juzu-card-img">
+            <!-- <img src="images/juzu-labradorite.jpg" alt="Labradorite Juzu"> -->
+            <p class="product-img-placeholder-text" style="color:var(--cream);font-size:0.7rem;">Photo</p>
+            <div class="product-overlay">
+              <span class="overlay-btn">Buy — One of One</span>
+            </div>
+          </div>
+          <div class="juzu-card-body">
+            <span class="juzu-bead-count">108 Beads</span>
+            <p class="juzu-card-name">Labradorite Juzu</p>
+            <p class="juzu-card-sub">Labradorite · Silk Tassel · One of One</p>
+            <p class="juzu-card-price">$385</p>
+          </div>
+        </div>
+
+        <!-- Juzu 2 -->
+        <div class="juzu-card reveal" onclick="openModal('Tiger\'s Eye Juzu','Tiger\'s Eye · 108 Beads · Knotted Cord · One of One','$340','108 tiger\'s eye beads hand-knotted on waxed cord. A stone of confidence and focus. One of one.','#your-stripe-link')">
+          <div class="juzu-card-img">
+            <p class="product-img-placeholder-text" style="color:var(--cream);font-size:0.7rem;">Photo</p>
+            <div class="product-overlay">
+              <span class="overlay-btn">Buy — One of One</span>
+            </div>
+          </div>
+          <div class="juzu-card-body">
+            <span class="juzu-bead-count">108 Beads</span>
+            <p class="juzu-card-name">Tiger's Eye Juzu</p>
+            <p class="juzu-card-sub">Tiger's Eye · Knotted Cord · One of One</p>
+            <p class="juzu-card-price">$340</p>
+          </div>
+        </div>
+
+        <!-- Juzu 3 — Custom CTA Card -->
+        <div class="juzu-card reveal" onclick="document.getElementById('juzu-custom').scrollIntoView({behavior:'smooth'})" style="border-color:rgba(184,154,106,0.3);cursor:pointer;">
+          <div class="juzu-card-img" style="background:rgba(184,154,106,0.03);">
+            <div style="text-align:center;padding:2rem;">
+              <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2rem;color:var(--gold-light);margin-bottom:0.5rem;">Yours.</p>
+              <p style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:0.6rem;letter-spacing:0.3em;opacity:0.4;">COMMISSION A CUSTOM JUZU</p>
+            </div>
+          </div>
+          <div class="juzu-card-body">
+            <span class="juzu-bead-count">108 Beads · Your Stone</span>
+            <p class="juzu-card-name">Custom Commission</p>
+            <p class="juzu-card-sub">Your stone · Your intention · Your tassel</p>
+            <p class="juzu-card-price">From $290</p>
+          </div>
+        </div>
+
+      </div><!-- /juzu-grid -->
+
+      <!-- Juzu Custom CTA Band -->
+      <div class="juzu-cta-band" id="juzu-custom">
+        <div class="juzu-cta-text">
+          <p class="juzu-cta-title">Begin with a conversation.</p>
+          <p class="juzu-cta-sub">Every custom juzu starts with your intention. Scroll down to inquire.</p>
+        </div>
+        <a href="#custom-studio" class="btn-primary" onclick="switchWorld('bold');setTimeout(()=>document.getElementById('custom-studio').scrollIntoView({behavior:'smooth'}),200)">
+          Commission Your Juzu →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PRESS / FEATURES SECTION (Both Worlds)
+  ═══════════════════════════════════════════ -->
+  <div id="press">
+    <div class="gold-rule"></div>
+    <section class="press-section">
+      <div class="press-inner">
+        <span class="section-label">Press &amp; Recognition</span>
+        <h2 class="section-title">As seen in &amp; worn at.</h2>
+
+        <div class="press-grid">
+
+          <!-- French Vogue -->
+          <div class="press-card reveal">
+            <div class="press-accent"></div>
+            <p class="press-outlet">Vogue Paris</p>
+            <p class="press-event">Paris Fashion Week · Featured Editorial</p>
+            <p class="press-quote">"A California designer making quiet waves in the jewelry world — pieces that feel both ancient and entirely new."</p>
+          </div>
+
+          <!-- American Craft Council -->
+          <div class="press-card reveal">
+            <div class="press-accent"></div>
+            <p class="press-outlet">American Craft Council</p>
+            <p class="press-event">ACC Show · Exhibitor</p>
+            <p class="press-quote">"RACA's bold, sculptural work stood apart at the ACC show — each piece demanding conversation, refusing to be ignored."</p>
+          </div>
+
+          <!-- Add more press cards as earned -->
+          <div class="press-card reveal" style="border-style:dashed;opacity:0.4;">
+            <div class="press-accent" style="background:transparent;"></div>
+            <p class="press-outlet" style="opacity:0.4">Your Next Feature</p>
+            <p class="press-event">Press inquiries welcome</p>
+            <p class="press-quote" style="opacity:0.5">For collaborations, features, and press requests, reach out directly.</p>
+          </div>
+
+        </div>
+
+        <!-- Show / Credential Badges -->
+        <div class="show-badges">
+          <div class="show-badge">
+            <p class="badge-logo">Vogue Paris</p>
+            <p class="badge-sub">Fashion Week Feature</p>
+          </div>
+          <div style="width:1px;height:40px;background:var(--border-dark);"></div>
+          <div class="show-badge">
+            <p class="badge-logo">ACC Show</p>
+            <p class="badge-sub">American Craft Council · Exhibitor</p>
+          </div>
+          <div style="width:1px;height:40px;background:var(--border-dark);"></div>
+          <div class="show-badge">
+            <p class="badge-logo">Handmade in California</p>
+            <p class="badge-sub">Since 2013</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       INSTAGRAM FEED STRIP
+  ═══════════════════════════════════════════ -->
+  <section class="insta-section">
+    <div class="insta-inner">
+      <p class="insta-handle">@racabycara</p>
+      <p class="insta-desc">Follow along for new studio work, process shots, and behind the scenes</p>
+      <a href="https://instagram.com/racabycara" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;margin-bottom:2.5rem;">Follow on Instagram</a>
+
+      <!-- Instagram grid — replace with embed or real photos -->
+      <div class="insta-grid">
+        <a href="https://instagram.com/racabycara" target="_blank" class="insta-thumb"><span>photo</span></a>
+        <a href="https://instagram.com/racabycara" target="_blank" class="insta-thumb"><span>photo</span></a>
+        <a href="https://instagram.com/racabycara" target="_blank" class="insta-thumb"><span>photo</span></a>
+        <a href="https://instagram.com/racabycara" target="_blank" class="insta-thumb"><span>photo</span></a>
+        <a href="https://instagram.com/racabycara" target="_blank" class="insta-thumb"><span>photo</span></a>
+      </div>
+      <!-- Tip: Use Elfsight Instagram Feed widget (free tier available) to auto-populate this grid -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT
+  ═══════════════════════════════════════════ -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-img-frame">
+        <!-- <img src="images/cara-portrait.jpg" alt="Cara, founder of RACA"> -->
+        <p class="placeholder-text" style="color:var(--charcoal);opacity:0.3;">Founder portrait<br>or studio photo</p>
+      </div>
+      <div class="about-text">
+        <span class="section-label">About RACA</span>
+        <h2 class="about-title">Made by hand.<br>Made with intention.</h2>
+        <p class="about-body">
+          RACA is the jewelry practice of Cara, a California-based metalsmith and designer. Every piece — from the most delicate layering chain to the boldest sculptural collar — is made by hand, one at a time.
+        </p>
+        <p class="about-body">
+          RACA exists in two registers: <em>Essentials</em>, for the pieces you wear every day without thinking, and <em>Studio</em>, for the pieces you wear when you want to say something. Both are made with the same care, the same materials, the same hands.
+        </p>
+        <p class="about-body">
+          Featured in French Vogue during Paris Fashion Week and shown at the American Craft Council, RACA's studio work has been worn by collectors and artists across the US.
+        </p>
+        <a href="/cdn-cgi/l/email-protection#3a525f5656557a485b595b5843595b485b14595557" class="btn-outline-dark" style="margin-left:0;color:var(--charcoal)">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section">
+    <div class="contact-inner">
+      <span class="section-label" style="display:block;text-align:center;">Contact</span>
+      <p class="contact-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d55585151527d4f5c5e5c5f445e5c4f5c135e5250">[email&#160;protected]</a></p>
+      <p class="contact-sub">For custom commissions, press, and wholesale inquiries</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <p class="footer-brand">RACA</p>
+          <p class="footer-desc">Handcrafted jewelry made in California. Two collections: Essentials for every day, Studio for every occasion that demands to be remembered.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links">
+            <li><a href="#" onclick="switchWorld('essentials')">Essentials</a></li>
+            <li><a href="#" onclick="switchWorld('bold')">Studio</a></li>
+            <li><a href="#juzu" onclick="scrollToJuzu()">Juzu 数珠</a></li>
+            <li><a href="#press">Press</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="https://instagram.com/racabycara" target="_blank">Instagram</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Information</p>
+          <ul class="footer-links">
+            <li><a href="/cdn-cgi/l/email-protection#a2cac7cececde2d0c3c1c3c0dbc1c3d0c38cc1cdcf">Contact</a></li>
+            <li><a href="#" onclick="alert('Shipping: 3–7 business days US. International available. All orders include tracking.')">Shipping</a></li>
+            <li><a href="#" onclick="alert('Returns accepted within 14 days for unworn pieces. Contact hello@racabycara.com.')">Returns</a></li>
+            <li><a href="#" onclick="alert('All one-of-one studio pieces are final sale. Custom commissions welcome.')">Custom Orders</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="yr"></span> RACA by Cara. All rights reserved. Handmade in California.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/racabycara" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /main-site -->
+
+<!-- ═══════════════════════════════════════════
+     PURCHASE MODAL
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal(null,true)">✕</button>
+    <p class="modal-product-name" id="modal-name">Product Name</p>
+    <p class="modal-product-material" id="modal-material">Material</p>
+    <p class="modal-product-price" id="modal-price">$00</p>
+    <p class="modal-product-desc" id="modal-desc">Description</p>
+    <a id="modal-buy-btn" href="#" class="modal-stripe-btn" target="_blank" rel="noopener">
+      Purchase Securely via Stripe →
+    </a>
+    <p class="modal-stripe-note">Powered by Stripe. Secure checkout. No account required.</p>
+    <div class="modal-stripe-icons">
+      <span class="stripe-icon">Visa</span>
+      <span class="stripe-icon">MC</span>
+      <span class="stripe-icon">Amex</span>
+      <span class="stripe-icon">PayPal</span>
+      <span class="stripe-icon">Apple Pay</span>
+    </div>
+  </div>
+</div>
+
+<!-- Floating CTA -->
+<div class="floating-cta" id="floating-cta">
+  <a href="#essentials-shop" onclick="scrollToShop()">Shop Now</a>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ─── LANDING
+  function enterWorld(world) {
+    document.getElementById('landing').classList.add('hidden');
+    document.getElementById('main-site').classList.add('visible');
+    setTimeout(() => switchWorld(world), 100);
+    sessionStorage.setItem('racaEntered', '1');
+  }
+
+  function showLanding() {
+    document.getElementById('landing').classList.remove('hidden');
+  }
+
+  // Skip landing if already visited
+  if (sessionStorage.getItem('racaEntered')) {
+    document.getElementById('landing').classList.add('hidden');
+    document.getElementById('main-site').classList.add('visible');
+  }
+
+  // ─── WORLD SWITCHING
+  function switchWorld(world) {
+    document.querySelectorAll('.world').forEach(w => w.classList.remove('active'));
+    document.querySelectorAll('.world-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('world-' + world).classList.add('active');
+    document.getElementById('tab-' + world).classList.add('active');
+    // Scroll to world bar
+    document.getElementById('world-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function scrollToShop() {
+    const activeWorld = document.querySelector('.world.active').id.replace('world-','');
+    const targetId = activeWorld === 'bold' ? 'bold-shop' : 'essentials-shop';
+    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function scrollToJuzu() {
+    switchWorld('bold');
+    setTimeout(() => document.getElementById('juzu').scrollIntoView({ behavior: 'smooth' }), 300);
+  }
+
+  function scrollToCustom() {
+    const activeWorld = document.querySelector('.world.active').id.replace('world-','');
+    if (activeWorld === 'bold') {
+      document.getElementById('custom-studio').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      document.getElementById('custom-essentials').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function selectOption(el, type) {
+    document.querySelectorAll('.custom-option-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+    const select = document.getElementById('studio-commission-type');
+    if (select) {
+      if (type === 'juzu') select.value = 'Custom Juzu 数珠 — 108 Beads';
+      else if (type === 'both') select.value = 'Juzu + Studio Set';
+      else select.value = 'Studio Piece — Bold / Sculptural';
+    }
+  }
+
+  function submitEssentialsCustom(e) {
+    e.preventDefault();
+    const name = e.target.querySelector('input[type=text]').value;
+    const email = e.target.querySelector('input[type=email]').value;
+    window.location.href = `mailto:hello@racabycara.com?subject=Custom Essentials Inquiry from ${encodeURIComponent(name)}&body=From: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease describe your custom piece below:%0A`;
+  }
+
+  function submitStudioCustom(e) {
+    e.preventDefault();
+    const name = e.target.querySelector('input[type=text]').value;
+    const email = e.target.querySelector('input[type=email]').value;
+    const type = document.getElementById('studio-commission-type').value;
+    window.location.href = `mailto:hello@racabycara.com?subject=Studio Commission Inquiry — ${encodeURIComponent(type)} from ${encodeURIComponent(name)}&body=From: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AType: ${encodeURIComponent(type)}%0A%0APlease describe your vision below:%0A`;
+  }
+
+  // ─── CATEGORY FILTER (ESSENTIALS)
+  function filterCat(btn, cat) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#essentials-grid .product-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // ─── MODAL
+  function openModal(name, material, price, desc, stripeLink) {
+    document.getElementById('modal-name').textContent = name;
+    document.getElementById('modal-material').textContent = material;
+    document.getElementById('modal-price').textContent = price;
+    document.getElementById('modal-desc').textContent = desc;
+    // Point to your Stripe Payment Link for this product
+    // OR use pay.racabycara.com as your base URL
+    const link = stripeLink !== '#your-stripe-payment-link-here' ? stripeLink : 'https://pay.racabycara.com';
+    document.getElementById('modal-buy-btn').href = link;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(event, force) {
+    if (force || (event && event.target === document.getElementById('modal-overlay'))) {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // ─── NAV SCROLL
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    // Floating CTA
+    const cta = document.getElementById('floating-cta');
+    if (window.scrollY > 400) {
+      cta.classList.add('visible');
+    } else {
+      cta.classList.remove('visible');
+    }
+  });
+
+  // ─── REVEAL ON SCROLL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in-view');
+    });
+  }, { threshold: 0.15 });
+  r
