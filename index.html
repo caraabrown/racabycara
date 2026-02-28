@@ -2446,7 +2446,7 @@
   <section class="contact-section">
     <div class="contact-inner">
       <span class="section-label" style="display:block;text-align:center;">Contact</span>
-      <p class="contact-email"><a href="#" data-email-link style="color:inherit;"><span data-email-text>info@racabycara.com</span></a></p>
+      <p class="contact-email"><a href="#" data-email-link style="color:inherit;"><span data-email-text><span class="__cf_email__" data-cfemail="5a33343c351a283b393b3823393b283b74393537">[email&#160;protected]</span></span></a></p>
       <p class="contact-sub">For custom commissions, press, and wholesale inquiries</p>
     </div>
   </section>
@@ -2475,7 +2475,7 @@
         <div>
           <p class="footer-col-title">Information</p>
           <ul class="footer-links">
-            <li><a href="#" data-email-link>Contact — <span data-email-text>info@racabycara.com</span></a></li>
+            <li><a href="#" data-email-link>Contact — <span data-email-text><span class="__cf_email__" data-cfemail="b6dfd8d0d9f6c4d7d5d7d4cfd5d7c4d798d5d9db">[email&#160;protected]</span></span></a></li>
             <li><a href="javascript:void(0)" onclick="switchWorld('essentials');setTimeout(()=>document.getElementById('custom-essentials').scrollIntoView({behavior:'smooth'}),300)" style="color:var(--gold-light);">Custom Essentials ✦</a></li>
             <li><a href="javascript:void(0)" onclick="switchWorld('bold');setTimeout(()=>document.getElementById('custom-studio').scrollIntoView({behavior:'smooth'}),300)" style="color:var(--gold-light);">Commission Studio / Juzu ✦</a></li>
             <li><a href="javascript:void(0)" onclick="alert('Shipping: 3–7 business days US. International available. All orders include tracking.')">Shipping</a></li>
@@ -2523,128 +2523,64 @@
   <a href="javascript:void(0)" onclick="scrollToShop()">Shop Now</a>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ─── LANDING
+<script>
+  // ─── ALL FUNCTIONS IN GLOBAL SCOPE — no wrappers, no modules ───
+
   function enterWorld(world) {
     document.getElementById('landing').classList.add('hidden');
     document.getElementById('main-site').classList.add('visible');
-    setTimeout(() => switchWorld(world), 100);
-    sessionStorage.setItem('racaEntered', '1');
+    setTimeout(function() { switchWorld(world); }, 150);
+    try { sessionStorage.setItem('racaEntered', '1'); } catch(e) {}
   }
 
   function showLanding() {
     document.getElementById('landing').classList.remove('hidden');
   }
 
-  // Skip landing if already visited
-  if (sessionStorage.getItem('racaEntered')) {
-    document.getElementById('landing').classList.add('hidden');
-    document.getElementById('main-site').classList.add('visible');
-  }
-
-  // ─── WORLD SWITCHING
   function switchWorld(world) {
-    document.querySelectorAll('.world').forEach(w => w.classList.remove('active'));
-    document.querySelectorAll('.world-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.world').forEach(function(w) { w.classList.remove('active'); });
+    document.querySelectorAll('.world-tab').forEach(function(t) { t.classList.remove('active'); });
     document.getElementById('world-' + world).classList.add('active');
     document.getElementById('tab-' + world).classList.add('active');
-    // Scroll to world bar
     document.getElementById('world-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function scrollToShop() {
-    const activeWorld = document.querySelector('.world.active').id.replace('world-','');
-    const targetId = activeWorld === 'bold' ? 'bold-shop' : 'essentials-shop';
+    var activeWorld = document.querySelector('.world.active').id.replace('world-', '');
+    var targetId = activeWorld === 'bold' ? 'bold-shop' : 'essentials-shop';
     document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
   }
 
   function scrollToJuzu() {
     switchWorld('bold');
-    setTimeout(() => document.getElementById('juzu').scrollIntoView({ behavior: 'smooth' }), 300);
+    setTimeout(function() { document.getElementById('juzu').scrollIntoView({ behavior: 'smooth' }); }, 350);
   }
 
   function scrollToCustom() {
-    const activeWorld = document.querySelector('.world.active').id.replace('world-','');
-    if (activeWorld === 'bold') {
-      document.getElementById('custom-studio').scrollIntoView({ behavior: 'smooth' });
-    } else {
-      document.getElementById('custom-essentials').scrollIntoView({ behavior: 'smooth' });
-    }
+    var activeWorld = document.querySelector('.world.active').id.replace('world-', '');
+    var targetId = activeWorld === 'bold' ? 'custom-studio' : 'custom-essentials';
+    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
   }
 
   function scrollToSection(id) {
-    // Sections outside worlds (press, about) are always visible
-    const el = document.getElementById(id);
+    var el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function selectOption(el, type) {
-    document.querySelectorAll('.custom-option-item').forEach(i => i.classList.remove('selected'));
-    el.classList.add('selected');
-    const select = document.getElementById('studio-commission-type');
-    if (select) {
-      if (type === 'juzu') select.value = 'Custom Juzu 数珠 — 108 Beads';
-      else if (type === 'both') select.value = 'Juzu + Studio Set';
-      else select.value = 'Studio Piece — Bold / Sculptural';
-    }
-  }
-
-  // ─── EMAIL LINKS: built in JS to survive CDN email obfuscation
-  const EMAIL = ['info', 'racabycara.com'].join('@');
-
-  // Wire up all email links on page load
-  document.querySelectorAll('[data-email-link]').forEach(el => {
-    el.href = 'mailto:' + EMAIL;
-  });
-  document.querySelectorAll('[data-email-text]').forEach(el => {
-    el.textContent = EMAIL;
-  });
-
-  function mailtoLink(subject, body) {
-    return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  }
-
-  function submitEssentialsCustom(e) {
-    e.preventDefault();
-    const name = e.target.querySelector('input[type=text]').value;
-    const pieceType = e.target.querySelector('select').value;
-    const vision = e.target.querySelector('textarea').value;
-    window.location.href = mailtoLink(
-      'Custom Essentials Inquiry — ' + pieceType + ' from ' + name,
-      'Name: ' + name + '\nPiece: ' + pieceType + '\n\nVision:\n' + vision
-    );
-  }
-
-  function submitStudioCustom(e) {
-    e.preventDefault();
-    const name = e.target.querySelector('input[type=text]').value;
-    const type = document.getElementById('studio-commission-type').value;
-    const vision = e.target.querySelector('textarea').value;
-    window.location.href = mailtoLink(
-      'Studio Commission — ' + type + ' from ' + name,
-      'Name: ' + name + '\nCommission Type: ' + type + '\n\nVision:\n' + vision
-    );
-  }
-
-  // ─── CATEGORY FILTER (ESSENTIALS)
   function filterCat(btn, cat) {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
-    document.querySelectorAll('#essentials-grid .product-card').forEach(card => {
-      const match = cat === 'all' || card.dataset.cat === cat;
-      card.style.display = match ? '' : 'none';
+    document.querySelectorAll('#essentials-grid .product-card').forEach(function(card) {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
     });
   }
 
-  // ─── MODAL
   function openModal(name, material, price, desc, stripeLink) {
     document.getElementById('modal-name').textContent = name;
     document.getElementById('modal-material').textContent = material;
     document.getElementById('modal-price').textContent = price;
     document.getElementById('modal-desc').textContent = desc;
-    // Point to your Stripe Payment Link for this product
-    // OR use pay.racabycara.com as your base URL
-    const link = stripeLink !== '#your-stripe-payment-link-here' ? stripeLink : 'https://pay.racabycara.com';
+    var link = (stripeLink && stripeLink !== '#your-stripe-link') ? stripeLink : 'https://pay.racabycara.com';
     document.getElementById('modal-buy-btn').href = link;
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -2657,28 +2593,100 @@
     }
   }
 
-  // ─── NAV SCROLL
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('main-nav');
-    if (window.scrollY > 60) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
+  function selectOption(el, type) {
+    document.querySelectorAll('.custom-option-item').forEach(function(i) { i.classList.remove('selected'); });
+    el.classList.add('selected');
+    var select = document.getElementById('studio-commission-type');
+    if (select) {
+      if (type === 'juzu') select.value = 'Custom Juzu 数珠 — 108 Beads';
+      else if (type === 'both') select.value = 'Juzu + Studio Set';
+      else select.value = 'Studio Piece — Bold / Sculptural';
     }
-    // Floating CTA
-    const cta = document.getElementById('floating-cta');
-    if (window.scrollY > 400) {
-      cta.classList.add('visible');
-    } else {
-      cta.classList.remove('visible');
+  }
+
+  // ─── EMAIL: built in JS so CDN obfuscators can't mangle it
+  var EMAIL = ['info', 'racabycara.com'].join('@');
+
+  function mailtoLink(subject, body) {
+    return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
+  function submitEssentialsCustom(e) {
+    e.preventDefault();
+    var name = e.target.querySelector('input[type=text]').value;
+    var pieceType = e.target.querySelector('select').value;
+    var vision = e.target.querySelector('textarea').value;
+    window.location.href = mailtoLink(
+      'Custom Essentials Inquiry — ' + pieceType + ' from ' + name,
+      'Name: ' + name + '\nPiece: ' + pieceType + '\n\nVision:\n' + vision
+    );
+  }
+
+  function submitStudioCustom(e) {
+    e.preventDefault();
+    var name = e.target.querySelector('input[type=text]').value;
+    var type = document.getElementById('studio-commission-type').value;
+    var vision = e.target.querySelector('textarea').value;
+    window.location.href = mailtoLink(
+      'Studio Commission — ' + type + ' from ' + name,
+      'Name: ' + name + '\nCommission Type: ' + type + '\n\nVision:\n' + vision
+    );
+  }
+
+  // ─── INIT (runs after DOM is ready since script is at bottom of body)
+
+  // Skip landing if already visited this session
+  try {
+    if (sessionStorage.getItem('racaEntered')) {
+      document.getElementById('landing').classList.add('hidden');
+      document.getElementById('main-site').classList.add('visible');
+    }
+  } catch(e) {}
+
+  // Wire email links
+  document.querySelectorAll('[data-email-link]').forEach(function(el) {
+    el.href = 'mailto:' + EMAIL;
+  });
+  document.querySelectorAll('[data-email-text]').forEach(function(el) {
+    el.textContent = EMAIL;
+  });
+
+  // Footer year
+  var yrEl = document.getElementById('yr');
+  if (yrEl) yrEl.textContent = new Date().getFullYear();
+
+  // Nav scroll + floating CTA
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('main-nav');
+    if (nav) {
+      if (window.scrollY > 60) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    var cta = document.getElementById('floating-cta');
+    if (cta) {
+      if (window.scrollY > 400) cta.classList.add('visible');
+      else cta.classList.remove('visible');
     }
   });
 
-  // ─── REVEAL ON SCROLL
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('in-view');
-    });
-  }, { threshold: 0.15 });
-  r
+  // Reveal on scroll
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) e.target.classList.add('in-view');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function(r) { observer.observe(r); });
+  } else {
+    // Fallback for older browsers
+    reveals.forEach(function(r) { r.classList.add('in-view'); });
+  }
+
+  // Keyboard ESC closes modal
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal(null, true);
+  });
+</script>
+</body>
+</html>
