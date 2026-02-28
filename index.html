@@ -1610,16 +1610,16 @@
 
   <!-- NAV -->
   <nav id="main-nav">
-    <a href="#" class="nav-brand" onclick="showLanding()">RACA</a>
+    <a href="javascript:void(0)" class="nav-brand" onclick="showLanding()">RACA</a>
     <ul class="nav-links">
-      <li><a href="#shop" onclick="scrollToShop()">Shop</a></li>
-      <li><a href="#juzu" onclick="scrollToJuzu()">Juzu</a></li>
-      <li><a href="#custom-essentials" onclick="scrollToCustom()" style="color:var(--gold-light);">Custom ✦</a></li>
-      <li><a href="#press">Press</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="javascript:void(0)" onclick="scrollToShop()">Shop</a></li>
+      <li><a href="javascript:void(0)" onclick="scrollToJuzu()">Juzu</a></li>
+      <li><a href="javascript:void(0)" onclick="scrollToCustom()" style="color:var(--gold-light);">Custom ✦</a></li>
+      <li><a href="javascript:void(0)" onclick="scrollToSection('press')">Press</a></li>
+      <li><a href="javascript:void(0)" onclick="scrollToSection('about')">About</a></li>
       <li><a href="https://instagram.com/racabycara" target="_blank" rel="noopener">Instagram</a></li>
       <li>
-        <a href="#shop" class="nav-shop-btn" onclick="scrollToShop()">Shop Now</a>
+        <a href="javascript:void(0)" class="nav-shop-btn" onclick="scrollToShop()">Shop Now</a>
       </li>
     </ul>
   </nav>
@@ -1652,8 +1652,8 @@
             Handcrafted in California. Each essential is designed to wear daily, to layer, to cherish. Gold-filled, sterling silver, and natural stones — refined to their essence.
           </p>
           <div>
-            <a href="#essentials-shop" class="btn-primary" onclick="document.getElementById('essentials-shop').scrollIntoView({behavior:'smooth'})">Shop Essentials</a>
-            <a href="#press" class="btn-outline-dark">As Seen In</a>
+            <a href="javascript:void(0)" class="btn-primary" onclick="document.getElementById('essentials-shop').scrollIntoView({behavior:'smooth'})">Shop Essentials</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('press')" class="btn-outline-dark">As Seen In</a>
           </div>
         </div>
         <div class="hero-img-frame">
@@ -1671,116 +1671,234 @@
       <div class="section-inner">
         <span class="section-label">Shop Essentials</span>
         <h2 class="section-title" style="color:var(--charcoal)">Handcrafted for everyday.</h2>
-        <p class="section-subtitle" style="color:var(--charcoal)">Each piece made by hand in California. Limited quantities.</p>
+        <p class="section-subtitle" style="color:var(--charcoal)">Necklaces, bracelets, and Treasure Bottles. Each piece made by hand in California. Limited quantities.</p>
 
         <!-- Category filter -->
         <div class="category-nav">
           <button class="cat-btn active" onclick="filterCat(this,'all')">All</button>
           <button class="cat-btn" onclick="filterCat(this,'necklaces')">Necklaces</button>
           <button class="cat-btn" onclick="filterCat(this,'bracelets')">Bracelets</button>
-          <button class="cat-btn" onclick="filterCat(this,'earrings')">Earrings</button>
-          <button class="cat-btn" onclick="filterCat(this,'anklets')">Anklets</button>
-          <button class="cat-btn" onclick="filterCat(this,'rings')">Rings</button>
+          <button class="cat-btn" onclick="filterCat(this,'treasure-bottle')">Treasure Bottle</button>
         </div>
 
         <!-- Product Grid — Essentials -->
         <div class="product-grid" id="essentials-grid">
 
-          <!-- Card 1 -->
-          <div class="product-card" data-cat="necklaces" onclick="openModal('Delicate Layering Chain','14k Gold-filled · 16–18"','$68','A fine curb chain, designed to be worn alone or stacked. Adjustable with a lobster clasp.','#your-stripe-payment-link-here')">
+          <!-- ── NECKLACES ── -->
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Angela Moss Agate Droplet Necklace','Necklace · Handcrafted','$44.99','A delicate droplet necklace featuring Moss Agate stone. Adjustable clasp. Handcrafted in California.','#your-stripe-link')">
             <div class="product-img">
-              <!-- <img src="images/essentials-chain.jpg" alt="Delicate Layering Chain"> -->
-              <p class="product-img-placeholder-text">Product photo</p>
-              <div class="product-overlay">
-                <span class="overlay-btn">Quick Buy</span>
-              </div>
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/112/405/IMG_1449__31338.1490388481.JPG?c=2" alt="Angela Moss Agate Droplet Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
             </div>
             <div class="product-info">
-              <p class="product-name" style="color:var(--charcoal)">Delicate Layering Chain</p>
-              <p class="product-material">14k Gold-filled · 16–18"</p>
-              <p class="product-price">$68</p>
+              <p class="product-name" style="color:var(--charcoal)">Angela Moss Agate Droplet Necklace</p>
+              <p class="product-material">Necklace · Handcrafted</p>
+              <p class="product-price">$44.99</p>
             </div>
           </div>
 
-          <!-- Card 2 -->
-          <div class="product-card" data-cat="bracelets" onclick="openModal('Thin Gold Cuff','14k Gold-filled · Adjustable','$75','A slim, hammered cuff that wraps the wrist. One size fits most.','#your-stripe-payment-link-here')">
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Citrine Angela Droplet Necklace','Necklace · Citrine Stone','$39.99','A dainty citrine droplet necklace on a fine gold-filled chain. Adjust the clasp to suit your neckline.','#your-stripe-link')">
             <div class="product-img">
-              <p class="product-img-placeholder-text">Product photo</p>
-              <div class="product-overlay">
-                <span class="overlay-btn">Quick Buy</span>
-              </div>
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/121/442/IMG_1489__64925.1490388482.JPG?c=2" alt="Citrine Angela Droplet Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
             </div>
             <div class="product-info">
-              <p class="product-name" style="color:var(--charcoal)">Thin Gold Cuff</p>
-              <p class="product-material">14k Gold-filled · Adjustable</p>
-              <p class="product-price">$75</p>
+              <p class="product-name" style="color:var(--charcoal)">Citrine Angela Droplet Necklace</p>
+              <p class="product-material">Necklace · Citrine Stone</p>
+              <p class="product-price">$39.99</p>
             </div>
           </div>
 
-          <!-- Card 3 -->
-          <div class="product-card" data-cat="earrings" onclick="openModal('Small Hoop Set','Sterling Silver · 12mm','$55','Classic small hoops, sterling silver with a secure snap closure.','#your-stripe-payment-link-here')">
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Citrine Carolyn Necklace','Necklace · Citrine · Gold-filled','$59.99','A beautiful citrine stone pendant on a delicate gold-filled chain. Adjustable and lightweight — easy to layer.','#your-stripe-link')">
             <div class="product-img">
-              <p class="product-img-placeholder-text">Product photo</p>
-              <div class="product-overlay">
-                <span class="overlay-btn">Quick Buy</span>
-              </div>
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/120/438/IMG_1486__97081.1490388482.JPG?c=2" alt="Citrine Carolyn Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
             </div>
             <div class="product-info">
-              <p class="product-name" style="color:var(--charcoal)">Small Hoop Set</p>
-              <p class="product-material">Sterling Silver · 12mm</p>
-              <p class="product-price">$55</p>
+              <p class="product-name" style="color:var(--charcoal)">Citrine Carolyn Necklace</p>
+              <p class="product-material">Necklace · Citrine · Gold-filled</p>
+              <p class="product-price">$59.99</p>
             </div>
           </div>
 
-          <!-- Card 4 -->
-          <div class="product-card" data-cat="necklaces" onclick="openModal('Stone Drop Pendant','14k Gold-filled · Natural Stone','$95','A single faceted stone on a fine chain. Available in turquoise, labradorite, and rose quartz.','#your-stripe-payment-link-here')">
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Clear Quartz Triplet Necklace','Necklace · Clear Quartz · Gold-filled','$99.99','Three clear quartz crystals suspended on a fine gold-filled chain. The clarity of these stones is stunning in natural light.','#your-stripe-link')">
             <div class="product-img">
-              <p class="product-img-placeholder-text">Product photo</p>
-              <div class="product-overlay">
-                <span class="overlay-btn">Quick Buy</span>
-              </div>
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/117/425/IMG_2082__84153.1490388482.JPG?c=2" alt="Clear Quartz Triplet Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
             </div>
             <div class="product-info">
-              <p class="product-name" style="color:var(--charcoal)">Stone Drop Pendant</p>
-              <p class="product-material">14k Gold-filled · Natural Stone</p>
-              <p class="product-price">$95</p>
+              <p class="product-name" style="color:var(--charcoal)">Clear Quartz Triplet Necklace</p>
+              <p class="product-material">Necklace · Clear Quartz · Gold-filled</p>
+              <p class="product-price">$99.99</p>
             </div>
           </div>
 
-          <!-- Card 5 -->
-          <div class="product-card" data-cat="anklets" onclick="openModal('Dainty Anklet','14k Gold-filled · 9–10"','$58','A simple, adjustable anklet. Perfect for layering.','#your-stripe-payment-link-here')">
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Gratitude Lucky Charm Necklace','Necklace · Moss Agate · Matte Gold Brass','$69.99','Matte gold horseshoe and Moss Agate — two traditional lucky charms. Anchored by a stamped horseshoe charm in solid brass with a matte fine gold finish. Adjust the clasp to suit your top or blouse.','#your-stripe-link')">
             <div class="product-img">
-              <p class="product-img-placeholder-text">Product photo</p>
-              <div class="product-overlay">
-                <span class="overlay-btn">Quick Buy</span>
-              </div>
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/123/440/IMG_1960__55319.1490388482.JPG?c=2" alt="Gratitude Lucky Charm Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
             </div>
             <div class="product-info">
-              <p class="product-name" style="color:var(--charcoal)">Dainty Anklet</p>
-              <p class="product-material">14k Gold-filled · 9–10"</p>
-              <p class="product-price">$58</p>
+              <p class="product-name" style="color:var(--charcoal)">Gratitude Lucky Charm Necklace</p>
+              <p class="product-material">Moss Agate · Matte Gold Brass</p>
+              <p class="product-price">$69.99</p>
             </div>
           </div>
 
-          <!-- Card 6 -->
-          <div class="product-card" data-cat="rings" onclick="openModal('Stacking Band','Sterling Silver · Sizes 5–9','$48','A minimal band, perfect for stacking. Hammered texture, sterling silver.','#your-stripe-payment-link-here')">
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Gunmetal Quartz Triplet Necklace','Necklace · Quartz · Gunmetal Finish','$99.99','Three quartz crystals on a gunmetal-finished chain. A moodier take on the Triplet — rich, deep, and effortlessly cool.','#your-stripe-link')">
             <div class="product-img">
-              <p class="product-img-placeholder-text">Product photo</p>
-              <div class="product-overlay">
-                <span class="overlay-btn">Quick Buy</span>
-              </div>
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/119/433/IMG_1965__60226.1490388482.JPG?c=2" alt="Gunmetal Quartz Triplet Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
             </div>
             <div class="product-info">
-              <p class="product-name" style="color:var(--charcoal)">Stacking Band</p>
-              <p class="product-material">Sterling Silver · Sizes 5–9</p>
-              <p class="product-price">$48</p>
+              <p class="product-name" style="color:var(--charcoal)">Gunmetal Quartz Triplet Necklace</p>
+              <p class="product-material">Necklace · Quartz · Gunmetal</p>
+              <p class="product-price">$99.99</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Infinite Abundance Necklace','Necklace · Stone · Gold-filled','$69.99','A graceful, layerable pendant designed to remind you of the abundance already present in your life.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/107/400/IMG_1444__37727.1490388481.JPG?c=2" alt="Infinite Abundance Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Infinite Abundance Necklace</p>
+              <p class="product-material">Necklace · Gold-filled</p>
+              <p class="product-price">$69.99</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Lithium Quartz Triplet Necklace','Necklace · Lithium Quartz · Gold-filled','$99.99','Lithium quartz carries a soft, calming pink hue and a gentle energy. Three stones suspended together on a gold-filled chain.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/118/428/IMG_1966__37888.1490388482.JPG?c=2" alt="Lithium Quartz Triplet Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Lithium Quartz Triplet Necklace</p>
+              <p class="product-material">Necklace · Lithium Quartz · Gold-filled</p>
+              <p class="product-price">$99.99</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Nectar Pendant Necklace','Necklace · Stone Pendant · Gold-filled','$69.99','A sweet, simple pendant — like a drop of nectar caught mid-fall. Lightweight, elegant, and perfect for everyday wear.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/115/415/IMG_2090__87992.1490388482.JPG?c=2" alt="Nectar Pendant Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Nectar Pendant Necklace</p>
+              <p class="product-material">Necklace · Stone Pendant · Gold-filled</p>
+              <p class="product-price">$69.99</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Opal Camryn Necklace','Necklace · Ethiopian Opal · 14k Gold','$358.00','The colors of these small delicate Ethiopian Opal stones are truly amazing. Features about ¼ carat of opals and 14k gold beads wrapped with 14k gold wire on a 14k gold chain. Pairs beautifully with the Camryn Bracelet as a gift set.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/126/456/IMG_2079__60115.1490388482.JPG?c=2" alt="Opal Camryn Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Opal Camryn Necklace</p>
+              <p class="product-material">Ethiopian Opal · 14k Gold · ¼ carat</p>
+              <p class="product-price">$358.00</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Rose Quartz Triplet Necklace','Necklace · Rose Quartz · Gold-filled','$99.99','Three rose quartz stones — the stone of love — suspended on a gold-filled chain. Soft, feminine, and quietly powerful.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/114/412/IMG_2085__16058.1490388481.JPG?c=2" alt="Rose Quartz Triplet Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Rose Quartz Triplet Necklace</p>
+              <p class="product-material">Necklace · Rose Quartz · Gold-filled</p>
+              <p class="product-price">$99.99</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="necklaces" onclick="openModal('Spring Leaf Necklace','Necklace · Nature-inspired · Gold-filled','$69.99','A nature-inspired leaf pendant, delicate and detailed. Wear it to carry a little piece of the outside world with you.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170629072424im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/111/404/IMG_1440__38656.1490388481.JPG?c=2" alt="Spring Leaf Necklace" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Spring Leaf Necklace</p>
+              <p class="product-material">Necklace · Nature-inspired · Gold-filled</p>
+              <p class="product-price">$69.99</p>
+            </div>
+          </div>
+
+          <!-- ── BRACELETS ── -->
+
+          <div class="product-card" data-cat="bracelets" onclick="openModal('Camryn Sunstone Bracelet','Bracelet · Sunstone · Gold-filled','$258.00','A stunning sunstone bracelet with warm, shimmering stones. Pairs beautifully with the Opal Camryn Necklace for a complete set.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170421085122im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/137/395/IMG_1553__39485.1490388483.JPG?c=2" alt="Camryn Sunstone Bracelet" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Camryn Sunstone Bracelet</p>
+              <p class="product-material">Bracelet · Sunstone · Gold-filled</p>
+              <p class="product-price">$258.00</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="bracelets" onclick="openModal('Deco Opal Camryn Bracelet','Bracelet · Ethiopian Opal · 14k Gold','$318.00','Art deco-inspired bracelet featuring luminous Ethiopian opal stones set in 14k gold. A standout piece that works as well with denim as it does with evening wear.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170421085122im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/136/384/IMG_1572__74459.1490388483.JPG?c=2" alt="Deco Opal Camryn Bracelet" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Deco Opal Camryn Bracelet</p>
+              <p class="product-material">Bracelet · Ethiopian Opal · 14k Gold</p>
+              <p class="product-price">$318.00</p>
+            </div>
+          </div>
+
+          <!-- ── TREASURE BOTTLE ── -->
+
+          <div class="product-card" data-cat="treasure-bottle" onclick="openModal('Gift Treasure Bottle','Special Edition Matte Black · Includes RACA Pendant','$40.00','A special edition matte black Treasure Bottle — a beautifully curated gift vessel containing a signature RACA piece. Perfect for birthdays, holidays, and meaningful moments.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170421085122im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/138/459/Matte_Black_Treasure_Bottle__84489.1490388483.JPG?c=2" alt="Gift Treasure Bottle — Matte Black" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Gift Treasure Bottle</p>
+              <p class="product-material">Special Edition Matte Black · RACA Pendant Inside</p>
+              <p class="product-price">$40.00</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="treasure-bottle" onclick="openModal('Deluxe Holiday Treasure Bottle','Includes Signature RACA Pendant Necklace','$220.00','The Deluxe Treasure Bottle — a signature RACA pendant necklace housed in a beautiful gift vessel. A truly special and personal gift for someone you love.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170421085122im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/139/464/Vday_TB_2__78764.1490388483.JPG?c=2" alt="Deluxe Holiday Treasure Bottle" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Deluxe Holiday Treasure Bottle</p>
+              <p class="product-material">Includes Signature RACA Pendant Necklace</p>
+              <p class="product-price">$220.00</p>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="treasure-bottle" onclick="openModal('Treasure Bottle Annual Gift Package','12-Month Subscription · A New Piece Each Month','$918.00','The gift that is truly unique, every time. Twelve months of RACA — a new handcrafted piece delivered each month, beautifully packaged in a Treasure Bottle. The most personal gift you can give.','#your-stripe-link')">
+            <div class="product-img">
+              <img src="https://web.archive.org/web/20170421085122im_/http://cdn3.bigcommerce.com/s-cqoe8o719m/images/stencil/500x659/products/140/467/Gold_Treasure_Bottle_2__47841.1490388483.jpg?c=2" alt="Treasure Bottle Annual Gift Package" loading="lazy">
+              <div class="product-overlay"><span class="overlay-btn">Quick Buy</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name" style="color:var(--charcoal)">Treasure Bottle Annual Gift Package</p>
+              <p class="product-material">12-Month Subscription · New Piece Each Month</p>
+              <p class="product-price">$918.00</p>
             </div>
           </div>
 
         </div>
-        <!-- Add more products by duplicating a product-card block above and updating:
-             onclick parameters: (name, material, price, description, stripe-link)
-             data-cat: necklaces / bracelets / earrings / anklets / rings -->
+        <!-- To add more products: duplicate a product-card block above.
+             Update: onclick params (name, material, price, description, stripe-link),
+             data-cat (necklaces / bracelets / treasure-bottle),
+             img src (your own hosted photo), and alt text. -->
 
         <div style="text-align:center;margin-top:3rem;">
           <p style="font-family:'Josefin Sans';font-weight:200;font-size:0.6rem;letter-spacing:0.25em;opacity:0.4;margin-bottom:1rem;">HANDMADE IN LIMITED QUANTITIES · NEW PIECES ADDED SEASONALLY</p>
@@ -1917,7 +2035,7 @@
             Bold, one-of-a-kind statement pieces. Shown at the American Craft Council. Featured in French Vogue during Paris Fashion Week. Each piece is singular — when it's gone, it's gone.
           </p>
           <div>
-            <a href="#bold-shop" class="btn-primary" onclick="document.getElementById('bold-shop').scrollIntoView({behavior:'smooth'})">Shop Studio</a>
+            <a href="javascript:void(0)" class="btn-primary" onclick="document.getElementById('bold-shop').scrollIntoView({behavior:'smooth'})">Shop Studio</a>
             <a href="https://instagram.com/racabycara" target="_blank" rel="noopener" class="btn-outline-light">View on Instagram</a>
           </div>
         </div>
@@ -2142,7 +2260,7 @@
           <p class="juzu-body">
             Stones are chosen for their energy and beauty: labradorite for transformation, tiger's eye for clarity, malachite for protection, obsidian for grounding. Each juzu is unique — the stones, the tassel, the knot, the intention behind it — and every commission begins with a conversation.
           </p>
-          <a href="#juzu-custom" class="btn-primary" onclick="document.getElementById('juzu-custom').scrollIntoView({behavior:'smooth'})">Commission a Juzu →</a>
+          <a href="javascript:void(0)" class="btn-primary" onclick="document.getElementById('juzu-custom').scrollIntoView({behavior:'smooth'})">Commission a Juzu →</a>
         </div>
         <div class="juzu-img-frame reveal">
           <!-- <img src="images/juzu-hero.jpg" alt="RACA Custom Juzu"> -->
@@ -2210,7 +2328,7 @@
           <p class="juzu-cta-title">Begin with a conversation.</p>
           <p class="juzu-cta-sub">Every custom juzu starts with your intention. Scroll down to inquire.</p>
         </div>
-        <a href="#custom-studio" class="btn-primary" onclick="switchWorld('bold');setTimeout(()=>document.getElementById('custom-studio').scrollIntoView({behavior:'smooth'}),200)">
+        <a href="javascript:void(0)" class="btn-primary" onclick="switchWorld('bold');setTimeout(()=>document.getElementById('custom-studio').scrollIntoView({behavior:'smooth'}),300)">
           Commission Your Juzu →
         </a>
       </div>
@@ -2319,7 +2437,7 @@
         <p class="about-body">
           Featured in French Vogue during Paris Fashion Week and shown at the American Craft Council, RACA's studio work has been worn by collectors and artists across the US.
         </p>
-        <a href="/cdn-cgi/l/email-protection#3a525f5656557a485b595b5843595b485b14595557" class="btn-outline-dark" style="margin-left:0;color:var(--charcoal)">Get in Touch</a>
+        <a href="#" data-email-link class="btn-outline-dark" style="margin-left:0;color:var(--charcoal)">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -2328,7 +2446,7 @@
   <section class="contact-section">
     <div class="contact-inner">
       <span class="section-label" style="display:block;text-align:center;">Contact</span>
-      <p class="contact-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d55585151527d4f5c5e5c5f445e5c4f5c135e5250">[email&#160;protected]</a></p>
+      <p class="contact-email"><a href="#" data-email-link style="color:inherit;"><span data-email-text>info@racabycara.com</span></a></p>
       <p class="contact-sub">For custom commissions, press, and wholesale inquiries</p>
     </div>
   </section>
@@ -2346,21 +2464,22 @@
         <div>
           <p class="footer-col-title">Navigate</p>
           <ul class="footer-links">
-            <li><a href="#" onclick="switchWorld('essentials')">Essentials</a></li>
-            <li><a href="#" onclick="switchWorld('bold')">Studio</a></li>
-            <li><a href="#juzu" onclick="scrollToJuzu()">Juzu 数珠</a></li>
-            <li><a href="#press">Press</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="javascript:void(0)" onclick="switchWorld('essentials');window.scrollTo({top:0,behavior:'smooth'})">Essentials</a></li>
+            <li><a href="javascript:void(0)" onclick="switchWorld('bold');window.scrollTo({top:0,behavior:'smooth'})">Studio</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToJuzu()">Juzu 数珠</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('press')">Press</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('about')">About</a></li>
             <li><a href="https://instagram.com/racabycara" target="_blank">Instagram</a></li>
           </ul>
         </div>
         <div>
           <p class="footer-col-title">Information</p>
           <ul class="footer-links">
-            <li><a href="/cdn-cgi/l/email-protection#a2cac7cececde2d0c3c1c3c0dbc1c3d0c38cc1cdcf">Contact</a></li>
-            <li><a href="#" onclick="alert('Shipping: 3–7 business days US. International available. All orders include tracking.')">Shipping</a></li>
-            <li><a href="#" onclick="alert('Returns accepted within 14 days for unworn pieces. Contact hello@racabycara.com.')">Returns</a></li>
-            <li><a href="#" onclick="alert('All one-of-one studio pieces are final sale. Custom commissions welcome.')">Custom Orders</a></li>
+            <li><a href="#" data-email-link>Contact — <span data-email-text>info@racabycara.com</span></a></li>
+            <li><a href="javascript:void(0)" onclick="switchWorld('essentials');setTimeout(()=>document.getElementById('custom-essentials').scrollIntoView({behavior:'smooth'}),300)" style="color:var(--gold-light);">Custom Essentials ✦</a></li>
+            <li><a href="javascript:void(0)" onclick="switchWorld('bold');setTimeout(()=>document.getElementById('custom-studio').scrollIntoView({behavior:'smooth'}),300)" style="color:var(--gold-light);">Commission Studio / Juzu ✦</a></li>
+            <li><a href="javascript:void(0)" onclick="alert('Shipping: 3–7 business days US. International available. All orders include tracking.')">Shipping</a></li>
+            <li><a href="javascript:void(0)" onclick="alert('Returns accepted within 14 days for unworn, ready-made pieces. Custom and one-of-one pieces are final sale. Email info@racabycara.com.')">Returns</a></li>
           </ul>
         </div>
       </div>
@@ -2401,7 +2520,7 @@
 
 <!-- Floating CTA -->
 <div class="floating-cta" id="floating-cta">
-  <a href="#essentials-shop" onclick="scrollToShop()">Shop Now</a>
+  <a href="javascript:void(0)" onclick="scrollToShop()">Shop Now</a>
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -2453,6 +2572,12 @@
     }
   }
 
+  function scrollToSection(id) {
+    // Sections outside worlds (press, about) are always visible
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   function selectOption(el, type) {
     document.querySelectorAll('.custom-option-item').forEach(i => i.classList.remove('selected'));
     el.classList.add('selected');
@@ -2464,19 +2589,41 @@
     }
   }
 
+  // ─── EMAIL LINKS: built in JS to survive CDN email obfuscation
+  const EMAIL = ['info', 'racabycara.com'].join('@');
+
+  // Wire up all email links on page load
+  document.querySelectorAll('[data-email-link]').forEach(el => {
+    el.href = 'mailto:' + EMAIL;
+  });
+  document.querySelectorAll('[data-email-text]').forEach(el => {
+    el.textContent = EMAIL;
+  });
+
+  function mailtoLink(subject, body) {
+    return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
   function submitEssentialsCustom(e) {
     e.preventDefault();
     const name = e.target.querySelector('input[type=text]').value;
-    const email = e.target.querySelector('input[type=email]').value;
-    window.location.href = `mailto:hello@racabycara.com?subject=Custom Essentials Inquiry from ${encodeURIComponent(name)}&body=From: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease describe your custom piece below:%0A`;
+    const pieceType = e.target.querySelector('select').value;
+    const vision = e.target.querySelector('textarea').value;
+    window.location.href = mailtoLink(
+      'Custom Essentials Inquiry — ' + pieceType + ' from ' + name,
+      'Name: ' + name + '\nPiece: ' + pieceType + '\n\nVision:\n' + vision
+    );
   }
 
   function submitStudioCustom(e) {
     e.preventDefault();
     const name = e.target.querySelector('input[type=text]').value;
-    const email = e.target.querySelector('input[type=email]').value;
     const type = document.getElementById('studio-commission-type').value;
-    window.location.href = `mailto:hello@racabycara.com?subject=Studio Commission Inquiry — ${encodeURIComponent(type)} from ${encodeURIComponent(name)}&body=From: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AType: ${encodeURIComponent(type)}%0A%0APlease describe your vision below:%0A`;
+    const vision = e.target.querySelector('textarea').value;
+    window.location.href = mailtoLink(
+      'Studio Commission — ' + type + ' from ' + name,
+      'Name: ' + name + '\nCommission Type: ' + type + '\n\nVision:\n' + vision
+    );
   }
 
   // ─── CATEGORY FILTER (ESSENTIALS)
@@ -2484,11 +2631,8 @@
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('#essentials-grid .product-card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
+      const match = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = match ? '' : 'none';
     });
   }
 
